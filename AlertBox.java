@@ -1,8 +1,8 @@
 package haoyu.webcrawler;
 
 /**
- * The AlertBox class implements an alert box to be sued for invalid actions performed by the user
- * Created by Hao on 9/30/2016.
+ * The AlertBox class implements an alert box to be used for invalid actions performed by the user
+ * Created by Hao Yu on 9/30/2016.
  */
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;

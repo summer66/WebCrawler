@@ -4,41 +4,13 @@ import java.util.Scanner;
 
 /**
  * The BruteForce class provides a simple string matching method that uses the naive string-matching algorithm.
+ * The brute force searching algorithm compares the pattern with the text by "sliding" the pattern from the first position
+ * of the text to the end by character at a time.
  * Created by Hao on 9/30/2016.
  */
 public class BruteForce extends StrMatcher{
 
     private String pattern;
-
-    /**
-     * The optional main method of this class prompts the user to enter a string and a pattern (in string),
-     * then test if there is a match in the input string against the pattern.
-     * Delete the wrapping comment symbols to use the main method.
-     * @param
-     */
-   /*public static void main(String[] args)
-    {
-        Scanner scanner = new Scanner(System.in);
-        String text = "";
-        while(text.length()<1) {
-            System.out.print("Please enter a string to be searched: ");
-            text = scanner.nextLine().trim();
-        }
-
-        String pattern = "";
-        while(pattern.length()<1) {
-            System.out.print("Please enter a target pattern: ");
-            pattern = scanner.nextLine().trim();
-        }
-
-        boolean result = BruteForce.bruteForce(text, pattern);
-        if (result)
-           System.out.println("There is at least one match.");
-        else
-            System.out.println("There is no match.");
-
-        scanner.close();
-    }*/
 
    public BruteForce(String pattern){
        this.pattern = pattern;
@@ -77,6 +49,35 @@ public class BruteForce extends StrMatcher{
     public String getKeyWord()
     {
         return pattern;
+    }
+
+    /**
+     * Test client for the brute force string matching method
+     * @param
+     */
+   public static void main(String[] args)
+    {
+        Scanner scanner = new Scanner(System.in);
+        String text = "";
+        while(text.length()<1) {
+            System.out.print("Please enter a string to be searched: ");
+            text = scanner.nextLine().trim();
+        }
+
+        String pattern = "";
+        while(pattern.length()<1) {
+            System.out.print("Please enter a target pattern: ");
+            pattern = scanner.nextLine().trim();
+        }
+
+        BruteForce search = new BruteForce(pattern);
+        boolean result = search.search(text, pattern);
+        if (result)
+           System.out.println("There is at least one match.");
+        else
+            System.out.println("There is no match.");
+
+        scanner.close();
     }
 
 }
