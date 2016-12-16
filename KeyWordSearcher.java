@@ -2,7 +2,7 @@ package haoyu.webcrawler;
 
 /**
  * This helper class provides a keyword searcher to determine if the keywords entered by user occur in a certain webpage
- * Created by Hao on 10/30/2016.
+ * Created by Hao Yu on 10/30/2016.
  */
 public class KeyWordSearcher {
 

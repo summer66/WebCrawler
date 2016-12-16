@@ -6,6 +6,10 @@ import java.util.Scanner;
 
 /**
  * String matching method using the Rabin-Karp algorithm
+ * Rabin-Karp algorithm is based on hashing. A hash function for the pattern is computed.
+ * A match in the text is searched by using the same hash function for each possible M-character substring of the text (M = length of the pattern).
+ * If we find a text substring with the same hash value as the pattern, a match is confirmed by comparing the substring with the pattern character by character.
+ * The hash function used in this program is a prime number modulus. Some manipulations in calculating the hash value are applied in search() and hash().
  * Created by Hao on 9/27/2016.
  * Updated by Hao on 10/31/2016
  */
@@ -76,7 +80,7 @@ public class RabinKarp extends StrMatcher{
      * Calculate the hash value of a string with a fixed length
      * @param str
      * @param length
-     * @return
+     * @return the hash value
      */
     private long hash(String str, int length){
         long hashValue = 0;

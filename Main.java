@@ -10,20 +10,26 @@ import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
-import java.util.HashMap;
 
-/**Web Crawler Policy:
+/**
+ * Important: this basic web crawler is for educational purposes only.
+ * Web Crawler Policies: (ref: https://en.wikipedia.org/wiki/Web_crawler)
+ * Selection policy: this crawler only avoids crawling duplicate URLs (with simple URL normalization), not duplicate content.
+ * Re-visit policy: this crawler does not have re-visit related functions
+ * Politeness policy: for the purpose of the course project, the robots.txt file is not considered. However, it will be strictly followed if
+ * this crawler is to be used in the future for purposes other than educational.
+ * Parallelization policy: this is not a prarallel crawler.
  *
+ * Other considerations:
+ * Copyright of the web content is respected. This crawler does not use the crawled content for any intent other than educational purpose.
+ * Privacy issues: this cralwer does not attempt to crawl the content of sites that need authentication.
  *
- *
- *
- * The main class of the web crawler.
+ * This is the main class of the web crawler.
  * It creates a user interface that allows the user to
  * choose the type of crawler and string matching method, enter the starting URL,
  * choose the maximum number of URLs to crawl and enter the string to match the webpages against.
  * The crawler results will be displayed as well.
- * Created by Hao on 9/27/2016.
- * Updated by Hao on 10/31/2016
+ * Created by Hao Yu on 9/27/2016.
  */
 public class Main extends Application {
 
@@ -78,11 +84,11 @@ public class Main extends Application {
         RadioButton rb1 = new RadioButton("BFS");
         rb1.setToggleGroup(group1);
 
-        RadioButton rb2 = new RadioButton("DFS");
+        RadioButton rb2 = new RadioButton("IDDFS");
         rb2.setToggleGroup(group1);
 
         rb1.setUserData("BFS");
-        rb2.setUserData("DFS");
+        rb2.setUserData("IDDFS");
 
         HBox crawlerRBs = new HBox();
         crawlerRBs.setSpacing(10);
@@ -166,17 +172,21 @@ public class Main extends Application {
                 //Extract user input values
                 crawlerType = group1.getSelectedToggle().getUserData().toString();
                 strMatchMed = group2.getSelectedToggle().getUserData().toString();
-                startingURL = startURLTF.getText().trim().toLowerCase();
+                startingURL = URLVerifier.normalizeURL(startURLTF.getText().trim().toLowerCase());
                 maxNumOfURLs = Integer.parseInt(numOfURLCB.getValue());
                 keyWords = strInputTF.getText().trim().toLowerCase();
 
-                /*
-                  For PA2, only the BFS crawler is implemented
-                  Choosing either BFS or DFS will invoke the BFS crawler
-                */
-                BFSCrawler crawler = new BFSCrawler();
-                crawler.bfsCrawl(startingURL);
-                break;
+
+               if(crawlerType == "BFS") {
+                    BFSCrawler crawler = new BFSCrawler();
+                    crawler.crawl(startingURL);
+                    break;
+                }
+               if(crawlerType == "IDDFS"){
+                    IDDFSCrawler crawler = new IDDFSCrawler();
+                    crawler.crawl(startingURL);
+                    break;
+                }
 
             }
         });
