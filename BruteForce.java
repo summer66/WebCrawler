@@ -81,3 +81,4 @@ public class BruteForce extends StrMatcher{
     }
 
 }
+
