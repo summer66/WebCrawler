@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 package haoyu.webcrawler;
 
 import javafx.application.Platform;
